@@ -11,6 +11,7 @@ import static ee.forgr.audio.Constant.ERROR_AUDIO_ID_MISSING;
 import static ee.forgr.audio.Constant.LOOP;
 import static ee.forgr.audio.Constant.OPT_FADE_MUSIC;
 import static ee.forgr.audio.Constant.OPT_FOCUS_AUDIO;
+import static ee.forgr.audio.Constant.OPT_BACKGROUND;
 import static ee.forgr.audio.Constant.RATE;
 import static ee.forgr.audio.Constant.VOLUME;
 
@@ -50,6 +51,7 @@ public class NativeAudio
   private static HashMap<String, AudioAsset> audioAssetList;
   private static ArrayList<AudioAsset> resumeList;
   private boolean fadeMusic = false;
+  private boolean playOnBackground = false;
   private AudioManager audioManager;
 
   @Override
@@ -70,6 +72,7 @@ public class NativeAudio
   @Override
   protected void handleOnPause() {
     super.handleOnPause();
+    if (playOnBackground) return;
 
     try {
       if (audioAssetList != null) {
@@ -97,6 +100,7 @@ public class NativeAudio
   @Override
   protected void handleOnResume() {
     super.handleOnResume();
+    if (playOnBackground) return;
 
     try {
       if (resumeList != null) {
@@ -135,6 +139,9 @@ public class NativeAudio
         this.audioManager.abandonAudioFocus(this);
       }
     }
+
+    if(call.hasOption(OPT_BACKGROUND)) this.playOnBackground =
+      call.getBoolean(OPT_BACKGROUND);
   }
 
   @PluginMethod
