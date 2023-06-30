@@ -45,6 +45,7 @@ export interface ConfigureOptions {
   fade?: boolean;
   focus?: boolean;
   background?: boolean;
+  disableResume?: boolean;
 }
 
 export interface PreloadOptions {

@@ -13,6 +13,8 @@ public class Constant {
   public static final String ASSET_PATH = "assetPath";
   public static final String OPT_FADE_MUSIC = "fade";
   public static final String OPT_FOCUS_AUDIO = "focus";
+  public static final String OPT_BACKGROUND = "background";
+  public static final String OPT_DISABLE_RESUME = "disableResume";
   public static final String VOLUME = "volume";
   public static final String RATE = "rate";
   public static final String AUDIO_CHANNEL_NUM = "audioChannelNum";

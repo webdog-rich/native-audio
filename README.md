@@ -403,11 +403,12 @@ Listen for complete event
 
 #### ConfigureOptions
 
-| Prop             | Type                 |
-| ---------------- | -------------------- |
-| **`fade`**       | <code>boolean</code> |
-| **`focus`**      | <code>boolean</code> |
-| **`background`** | <code>boolean</code> |
+| Prop                | Type                 |
+| ------------------- | -------------------- |
+| **`fade`**          | <code>boolean</code> |
+| **`focus`**         | <code>boolean</code> |
+| **`background`**    | <code>boolean</code> |
+| **`disableResume`** | <code>boolean</code> |
 
 #### PreloadOptions
 

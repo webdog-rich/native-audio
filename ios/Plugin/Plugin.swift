@@ -2,7 +2,6 @@ import AVFoundation
 import Capacitor
 import CoreAudio
 import Foundation
-import Foundation
 
 enum MyError: Error {
   case runtimeError(String)
@@ -23,7 +22,7 @@ public class NativeAudio: CAPPlugin {
     self.fadeMusic = false
 
     do {
-      try self.session.setCategory(AVAudioSession.Category.playback, options: .mixWithOthers)
+      try self.session.setCategory(AVAudioSession.Category.playback)
       try self.session.setActive(false)
     } catch {
       print("Failed to set session category")
@@ -34,72 +33,41 @@ public class NativeAudio: CAPPlugin {
     if let fade = call.getBool(Constant.FadeKey) {
       self.fadeMusic = fade
     }
-
     if let focus = call.getBool(Constant.FocusAudio) {
-
       do {
-
         if focus {
-
           try self.session.setCategory(AVAudioSession.Category.playback)
-
         }
-
       } catch {
-
         print("Failed to set setCategory audio")
-
       }
-
     }
 
     if let background = call.getBool(Constant.Background) {
-
       do {
-
         if background {
-
           try self.session.setActive(true)
-
         }
-
       } catch {
-
         print("Failed to set setSession true")
-
       }
-
     }
 
     if let ignoreSilent = call.getBool(Constant.IgnoreSilent) {
-
       do {
-
         if ignoreSilent == false {
-
           if let focus = call.getBool(Constant.FocusAudio) {
-
             do {
-
               if focus {
-
                 try self.session.setCategory(AVAudioSession.Category.ambient)
-
               } else {
-
                 try self.session.setCategory(
                   AVAudioSession.Category.ambient, options: .mixWithOthers)
-
               }
-
             } catch {
-
               print("Failed to set setCategory audio")
-
             }
-
           }
-
         }
       }
     }
