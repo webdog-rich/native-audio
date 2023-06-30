@@ -12,6 +12,7 @@ import static ee.forgr.audio.Constant.LOOP;
 import static ee.forgr.audio.Constant.OPT_FADE_MUSIC;
 import static ee.forgr.audio.Constant.OPT_FOCUS_AUDIO;
 import static ee.forgr.audio.Constant.OPT_BACKGROUND;
+import static ee.forgr.audio.Constant.OPT_DISABLE_RESUME;
 import static ee.forgr.audio.Constant.RATE;
 import static ee.forgr.audio.Constant.VOLUME;
 
@@ -52,6 +53,7 @@ public class NativeAudio
   private static ArrayList<AudioAsset> resumeList;
   private boolean fadeMusic = false;
   private boolean playOnBackground = false;
+  private boolean disableResume = false;
   private AudioManager audioManager;
 
   @Override
@@ -101,6 +103,7 @@ public class NativeAudio
   protected void handleOnResume() {
     super.handleOnResume();
     if (playOnBackground) return;
+    if (disableResume) return;
 
     try {
       if (resumeList != null) {
@@ -140,8 +143,11 @@ public class NativeAudio
       }
     }
 
-    if(call.hasOption(OPT_BACKGROUND)) this.playOnBackground =
+    if (call.hasOption(OPT_BACKGROUND)) this.playOnBackground =
       call.getBoolean(OPT_BACKGROUND);
+    
+    if (call.hasOption(OPT_DISABLE_RESUME)) this.disableResume =
+      call.getBoolean(OPT_DISABLE_RESUME);
   }
 
   @PluginMethod
